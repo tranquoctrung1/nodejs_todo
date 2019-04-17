@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+html(lang="en" ng-app  = "myapp")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet" href="/bootstrap/css/bootstrap.min.css")
+        link(rel="stylesheet" href="/fontawesome/css/all.css")
+        link(rel="stylesheet", href="/assets/css/main.css")
+        link(rel="stylesheet", href="/editable/css/xeditable.min.css")
+        script(src="/angular/angular.min.js")
+        script(src="/editable/js/xeditable.min.js")
+        script(src="/assets/js/main.js")
+        script(src="/assets/js/services.js")
+        title= title
+    body(ng-controller="mycontroller")
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light.text-center
+            a.navbar-brand(href="#") Navbar
+            button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+                span.navbar-toggler-icon
+            #navbarSupportedContent.collapse.navbar-collapse
+                ul.navbar-nav.mr-auto
+                    li.nav-item.active
+                        a.nav-link(href="#")
+                            | Home 
+                            span.sr-only (current)
+                    li.nav-item
+                        a.nav-link(href="#") Link
+                    li.nav-item.dropdown
+                        a#navbarDropdown.nav-link.dropdown-toggle(href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                            | Dropdown
+                        .dropdown-menu(aria-labelledby="navbarDropdown")
+                            a.dropdown-item(href="#") Action
+                            a.dropdown-item(href="#") Another action
+                            .dropdown-divider
+                            a.dropdown-item(href="#") Something else here
+                    li.nav-item
+                            a.nav-link.disabled(href="#" tabindex="-1" aria-disabled="true") Disabled
+                form.form-inline.my-2.my-lg-0
+                    input.form-control.mr-sm-2(type="search" placeholder="Search" aria-label="Search")
+                    button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search
+        .jumbotron.jumbotron-fluid
+            .container
+                h1.display-4 Node Todo
+                    span.ml-3.btn.btn-primary {{todos.length}}
+                p.lead List of to do
+
+        .add-content.text-center.mt-3
+            input(ng-model ="inputdata" placeholder="Enter your work todo " type="text")
+            p(class="{{name}}" ng-bind="name")
+            button.btn.btn-primary(type="submit" ng-click="createtodo()" ng-disabled="!inputdata") Add
+            .loading.mt-3
+                i.fas.fa-spinner.fa-2x.fa-spin(ng-show="loading")
+            nav#todo
+                ul
+                    li(ng-repeat="todo in todos") 
+                        input.mr-3(type="checkbox" ng-model="todo.isDone" ng-click="updateTodo(todo)")
+                        a.mr-2(href="" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible")
+                            i.fas.fa-edit
+                        span(ng-class="{done: todo.isDone}" editable-text="todo.text" e-form="textBtnForm" onaftersave="updateTodo(todo)") {{todo.text}} with status: {{todo.isDone}}
+                        a.ml-3(href="" ng-click="deleteTodo(todo)")
+                            i.fab.fa-node
+        script(src="/jquery/jquery.slim.js")
+        script(src="/popper/umd/popper.min.js")
+        script(src="/bootstrap/js/bootstrap.min.js")

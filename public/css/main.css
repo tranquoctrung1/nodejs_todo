@@ -1,0 +1,15 @@
+#todo ul 
+{
+	list-style-type: none;
+	padding: 0
+}
+
+#todo ul li 
+{
+	margin: 5px 0;
+	font-weight: bold
+}
+
+.done {
+	text-decoration: underline;
+}
